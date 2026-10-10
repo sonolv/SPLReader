@@ -5,460 +5,332 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Bibliophile | มหาสงครามข้ามดวงดาว</title>
+    <title>SPLReader | มหาสงครามข้ามดวงดาว</title>
 
     <script>document.documentElement.classList.add('js')</script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/intro.css">
+    <!-- ฟอนต์ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Charm:wght@700&family=Noto+Serif+Thai&family=Pattaya&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Charm:wght@700&family=Noto+Serif+Thai&family=Pattaya&display=swap"
         rel="stylesheet">
+
+    <!-- CSS: Bootstrap ก่อน แล้วค่อยไฟล์ของเรา เพื่อให้ไฟล์เราเขียนทับได้ -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/intro.css">
+</head>
 
 <body class="bg-black text-white">
 
-
-    <!-- ================= HEADER ================= -->
-    <header>
-        <div class="container py-4">
-
-            <div class="d-flex justify-content-between align-items-center">
-
-                <!-- Logo -->
-                <div class="d-flex align-items-center">
-
-                    <a href="#">
-                        <img src="images/logo2.png" alt="SPLReader" width="90" class="img-fluid">
-                    </a>
-
-                    <span class="fw-bold fs-5 ms-3 logofont">
-                        SPLReader
-                    </span>
-
-                </div>
-    </header>
-
-
-    <!-- ================= MENU ================= -->
-
-    <!-- Side Menu -->
-    <nav class="side-menu">
-
-        <div class="side-menu-title">
-            Index
+    <!-- ================= TOP NAVIGATION ================= -->
+    <nav class="side-menu" aria-label="เมนูหลัก">
+        <div class="nav-l">
+            <a href="#hero" class="side-item active"><span class="side-dot">Book</span></a>
+            <a href="#highlight" class="side-item"><span class="side-dot">Highlight</span></a>
         </div>
 
-        <a href="#hero" class="side-item active">
-            <span class="side-dot">01</span>
-            <span class="side-text">หน้าหลัก</span>
-        </a>
+        <div class="nav-brand">SPLReader · Book Special Site</div>
 
-        <a href="#highlight" class="side-item">
-            <span class="side-dot">02</span>
-            <span class="side-text">จุดเด่น</span>
-        </a>
-
-        <a href="#value" class="side-item">
-            <span class="side-dot">03</span>
-            <span class="side-text">คุณค่า</span>
-        </a>
-
-        <a href="#summary" class="side-item">
-            <span class="side-dot">04</span>
-            <span class="side-text">สรุป</span>
-        </a>
-
+        <div class="nav-r">
+            <a href="#value" class="side-item"><span class="side-dot">Value</span></a>
+            <a href="#summary" class="side-item"><span class="side-dot">Summary</span></a>
+        </div>
     </nav>
 
 
-    <!-- ================= HERO ================= -->
+    <!-- ================= HERO : 01 BOOK ================= -->
     <section id="hero">
 
-        <div class="container py-5">
 
-            <div class="row align-items-center">
 
-                <!-- รูปภาพ -->
-                <div class="col-sm-12 col-md-5 text-center mb-5 mb-md-0">
+        <div class="container py-5 px-3">
 
-                    <img src="images/book1.webp" alt="มหาสงครามข้ามดวงดาว" class="img-fluid">
+            <div class="sec-head">
+                <div class="sec-code" aria-hidden="true">大英雄时代::SECTION_01 // SCI_FI // SPLREADER_RECOMMENDED</div>
+                <h2 class="sec-title">
+                    <span class="sec-num" aria-hidden="true">01</span>
+                    <span class="sec-word"><span class="boxed">BO</span>OK</span>
+                </h2>
+                <div class="sec-sub">
+                    <span>มหาสงครามข้ามดวงดาว</span>
+                    <span class="sec-sub-zh" lang="zh-Hans">大英雄时代</span>
+                    <span class="sec-pipe" aria-hidden="true"></span>
+                    <span class="sec-pixels" aria-hidden="true"></span>
+                </div>
+                <div class="sec-bars" aria-hidden="true"></div>
+            </div>
 
+            <div class="row align-items-center gy-4">
+
+                <!-- รูปปก: Bootstrap Carousel with indicators -->
+                <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"><img src="images/book1.webp" class="d-block w-100" alt="C1">
+                        </div>
+                        <div class="carousel-item"><img src="images/book2.webp" class="d-block w-100" alt="C2"></div>
+                        <div class="carousel-item"><img src="images/book3.webp" class="d-block w-100" alt="C3"></div>
+                    </div>
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
 
-
                 <!-- ข้อความ -->
-                <div class="col-sm-12 col-md-7 text-center">
+                <div class="col-sm-12 col-md-12 col-lg-7 text-center px-3">
 
-                    <h1 class="fs-1 fw-normal lh-base " >
-
-
-
-                        <span class="text-info fw-bold charm-bold">
-                            ขอพลีกายสลายสิ้นสู่ธุลี
+                    <h1 class="fs-1 lh-base">
+                        <span class="text-info charm-bold">
+                           <br class="d-sm-block d-lg-none">ขอพลีกายสลายสิ้นสู่ธุลี
                             <br><br>
                             ขจรทั่วสายนทีแห่งดารา
                         </span>
                         <br><br>
                     </h1>
 
-
                     <p class="lh-lg mt-5 mb-0 noto-serif blue">
-
                         ท่ามกลางสงครามและการเดินทางที่เต็มไปด้วยความสูญเสีย
                         <br class="d-sm-block d-lg-none">บางคนยังเลือกก้าวต่อไป
                         <br class="d-none d-lg-block">แม้รู้ว่าปลายทางอาจไม่มีวันหวนกลับ
-                        <br class="d-sm-block d-md-none d-lg-none">“มหาสงครามข้ามดวงดาว”
+                        <br class="d-sm-block d-lg-none">“มหาสงครามข้ามดวงดาว”
                         จึงไม่ใช่เพียงเรื่องราวของการต่อสู้
-                        <br class="d-sm-block d-md-none d-lg-block">แต่ยังถ่ายทอดความหมายของหน้าที่ ความเสียสละ
+                        <br>แต่ยังถ่ายทอดความหมายของหน้าที่ ความเสียสละ
                         และการจากลา
-                        <br class="d-sm-block d-md-none d-lg-none">พร้อมชวนให้เราคิดว่า <br
-                            class="d-sm-none d-md-none d-lg-block">
-                        “หากการยืนหยัดเพื่อความหวังต้องแลกด้วยชีวิต
-                        <br class="d-sm-block d-md-none d-lg-none">เราจะยังเลือกเดินต่อหรือไม่?”
-
-
-
+                        <br class="d-sm-block d-lg-none">พร้อมชวนให้เราคิดว่า
+                        <br class="d-none d-lg-block">“หากการยืนหยัดเพื่อความหวังต้องแลกด้วยชีวิต
+                        <br class="d-none d-sm-block d-lg-none">เราจะยังเลือกเดินต่อหรือไม่?”
                     </p>
 
                 </div>
-
             </div>
-
         </div>
 
     </section>
 
 
-    <!-- เส้นคั่น -->
     <div class="container">
-        <hr class="border border-light border-2 opacity-100">
+        <hr>
     </div>
 
 
-    <!-- ================= SECTION 1 : จุดเด่น ================= -->
+
+    <!-- ================= SECTION 1 : 02 HIGHLIGHT ================= -->
     <section id="highlight">
 
-        <div class="container py-5">
-
-            <h2 class="text-info text-center mb-5 pattaya-regular">
-                หนังสือเล่มนี้ให้อะไรกับเรา?
-            </h2>
-
-
-            <div class="text-secondary lh-lg noto-serif">
-
-
-                <p class="text-indent blue">
-                    หนึ่งในสิ่งที่น่าสนใจของ “มหาสงครามข้ามดวงดาว”
-                    คือการพาผู้อ่านไปพบกับสถานการณ์ที่ตัวละครต้องเผชิญกับการตัดสินใจที่ยากลำบาก
-                    เมื่อแต่ละทางเลือกไม่ได้ส่งผลเพียงต่อตัวเอง
-                    แต่ยังส่งผลต่อคนรอบข้างและภารกิจที่ได้รับมอบหมาย
-                    เรื่องราวจึงชวนให้เราคิดตามว่า หากเป็นตัวเรา เราจะเลือกทางไหน
-                    และพร้อมรับผิดชอบต่อผลของการตัดสินใจนั้นหรือไม่
-                </p>
+        <div class="container sec-head py-5 px-3">
+            <p class="sec-code">大英雄时代::SECTION_02 // SCI_FI // SPLREADER_RECOMMENDED</p>
+            <h2 class="sec-title"><span class="sec-num">02</span> <span class="boxed">HIGH</span>LIGHT</h2>
+            <div class="sec-sub">
+                <span>มหาสงครามข้ามดวงดาว</span>
+                <span class="sec-sub-zh">大英雄时代</span>
+                <span class="sec-pipe"></span>
+                <span class="sec-pixels"></span>
+            </div>
+            <div class="sec-bars"></div>
+            
+        </div>
 
 
-                <p class="text-indent blue">
-                    หนังสือเล่มนี้ยังสะท้อนให้เห็นถึงความไว้วางใจและความรับผิดชอบต่อหน้าที่ผ่านความสัมพันธ์ระหว่างตัวละคร
-                    การทำงานร่วมกันและสถานการณ์ที่ต้องพึ่งพาซึ่งกันและกัน
-                    เพราะในช่วงเวลาที่เต็มไปด้วยความไม่แน่นอน
-                    การมีคนที่สามารถเชื่อใจและพึ่งพาได้ถือเป็นสิ่งสำคัญ
-                    ขณะเดียวกันตัวละครเองก็ต้องพิสูจน์ให้เห็นว่า
-                    ตนสามารถรักษาความไว้วางใจที่ผู้อื่นมอบให้ได้
-                </p>
+        <div class="container-fluid px-3 pb-5">
 
+            <div class="row gx-0 gy-4 gy-lg-5 highlight-bands noto-serif blue">
 
-                <p class="mb-0 text-indent blue">
-                    นอกจากนี้ เรื่องราวยังทำให้เห็นถึงคุณค่าของความซื่อสัตย์และการทำในสิ่งที่ถูกต้อง
-                    แม้บางครั้งการพูดความจริงหรือการเลือกทำสิ่งที่ถูกต้อง อาจไม่ใช่ทางเลือกที่ง่ายที่สุด
-                    แต่การรับผิดชอบต่อหน้าที่และการซื่อสัตย์ต่อตนเองและผู้อื่น คือสิ่งที่ช่วยให้เราเติบโตขึ้น
-                    หนังสือจึงไม่ได้มอบเพียงความสนุกจากเรื่องราวการผจญภัย
-                    แต่ยังชวนให้ผู้อ่านนำแนวคิดเหล่านี้กลับมาปรับใช้กับการเรียน การทำงาน
-                    และการใช้ชีวิตร่วมกับผู้อื่นได้อีกด้วย
-                </p>
+                <!-- แถบซ้าย -->
+                <div class="col-12 col-lg-9">
+                    <p class="band band--l">
+                        หนึ่งในสิ่งที่น่าสนใจของ “มหาสงครามข้ามดวงดาว”
+                        คือการพาผู้อ่านไปพบกับสถานการณ์ที่ตัวละครต้องเผชิญกับการตัดสินใจที่ยากลำบาก
+                        เมื่อแต่ละทางเลือกไม่ได้ส่งผลเพียงต่อตัวเอง
+                        แต่ยังส่งผลต่อคนรอบข้างและภารกิจที่ได้รับมอบหมาย
+                        เรื่องราวจึงชวนให้เราคิดตามว่า หากเป็นตัวเรา เราจะเลือกทางไหน
+                        และพร้อมรับผิดชอบต่อผลของการตัดสินใจนั้นหรือไม่
+                    </p>
+                </div>
+
+                <!-- แถบขวา -->
+                <div class="col-12 col-lg-9 offset-lg-3">
+                    <p class="band band--r">
+                        หนังสือเล่มนี้ยังสะท้อนให้เห็นถึงความไว้วางใจและความรับผิดชอบต่อหน้าที่ผ่านความสัมพันธ์ระหว่างตัวละคร
+                        การทำงานร่วมกันและสถานการณ์ที่ต้องพึ่งพาซึ่งกันและกัน
+                        เพราะในช่วงเวลาที่เต็มไปด้วยความไม่แน่นอน
+                        การมีคนที่สามารถเชื่อใจและพึ่งพาได้ถือเป็นสิ่งสำคัญ
+                        ขณะเดียวกันตัวละครเองก็ต้องพิสูจน์ให้เห็นว่า
+                        ตนสามารถรักษาความไว้วางใจที่ผู้อื่นมอบให้ได้
+                    </p>
+                </div>
+
+                <!-- แถบซ้าย -->
+                <div class="col-12 col-lg-9">
+                    <p class="band band--l">
+
+                        นอกจากนี้ เรื่องราวยังทำให้เห็นถึงคุณค่าของความซื่อสัตย์และการทำในสิ่งที่ถูกต้อง
+                        แม้บางครั้งการพูดความจริงหรือการเลือกทำสิ่งที่ถูกต้อง อาจไม่ใช่ทางเลือกที่ง่ายที่สุด
+                        แต่การรับผิดชอบต่อหน้าที่และการซื่อสัตย์ต่อตนเองและผู้อื่น คือสิ่งที่ช่วยให้เราเติบโตขึ้น
+                        หนังสือจึงไม่ได้มอบเพียงความสนุกจากเรื่องราวการผจญภัย
+                        แต่ยังชวนให้ผู้อ่านนำแนวคิดเหล่านี้กลับมาปรับใช้กับการเรียน การทำงาน
+                        และการใช้ชีวิตร่วมกับผู้อื่นได้อีกด้วย
+                    </p>
+                </div>
 
             </div>
-
         </div>
+
 
     </section>
 
 
-    <!-- เส้นคั่น -->
     <div class="container">
-        <hr class="border border-light border-2 opacity-100">
+        <hr>
     </div>
 
 
-    <!-- ================= SECTION 2 : คุณค่า ================= -->
+
+    <!-- ================= SECTION 2 : 03 VALUE ================= -->
     <section id="value">
+        <div class="container py-5 px-3">
 
-        <div class="container py-5">
+            <div class="sec-head">
+                <div class="sec-code" aria-hidden="true">大英雄时代::SECTION_03 // SCI_FI // SPLREADER_RECOMMENDED</div>
+                <h2 class="sec-title">
+                    <span class="sec-num" aria-hidden="true">03</span>
+                    <span class="sec-word"><span class="boxed">VAL</span>UE</span>
+                </h2>
+                <div class="sec-sub">
+                    <span>มหาสงครามข้ามดวงดาว</span>
+                    <span class="sec-sub-zh" lang="zh-Hans">大英雄时代</span>
+                    <span class="sec-pipe" aria-hidden="true"></span>
+                    <span class="sec-pixels" aria-hidden="true"></span>
+                </div>
+                <div class="sec-bars" aria-hidden="true"></div>
+            </div>
 
-            <h2 class="text-info text-center mb-5 pattaya-regular">
-                คุณค่าที่ได้รับจากหนังสือเล่มนี้
-            </h2>
+            <!-- การ์ด 2 × 2 จัดกึ่งกลาง -->
+            <div class="row g-4 g-lg-6 justify-content-center value-grid px-3">
 
-
-            <div class="row g-4">
-
-                <!-- คอลัมน์ที่ 1 -->
-                <div class="col-sm-12 col-md-6 col-lg-3">
-
-                    <div class="h-100 border border-secondary rounded p-4">
-
-                        <p class="fw-bold text-white text-center noto-serif">
-                            1. ฝึกทักษะการตัดสินใจ <br>ภายใต้ความกดดัน
-                        </p>
-
-                        <p class=" lh-lg mb-0 noto-serif blue">
-                            เรียนรู้การคิดและตัดสินใจอย่างรอบคอบ
-                            เมื่อเผชิญกับสถานการณ์ที่กดดัน
-                            โดยคำนึงถึงเหตุผล ผลกระทบ
-                            และทางเลือกที่มีอยู่
-                        </p>
-
+                <div class="col-sm-12 col-md-6 col-lg-3 ">
+                    <div class="value-frame tech-frame">
+                        <div class="value-card noto-serif">
+                            <p class="fw-bold text-center">
+                                1. ฝึกทักษะการตัดสินใจ <br>ภายใต้ความกดดัน
+                            </p>
+                            <p class="lh-lg mb-0 blue">
+                                เรียนรู้การคิดและตัดสินใจอย่างรอบคอบ
+                                เมื่อเผชิญกับสถานการณ์ที่กดดัน
+                                โดยคำนึงถึงเหตุผล ผลกระทบ
+                                และทางเลือกที่มีอยู่
+                            </p>
+                            <span class="card-tag" aria-hidden="true">VAL::01</span>
+                        </div>
                     </div>
-
                 </div>
 
-
-                <!-- คอลัมน์ที่ 2 -->
-                <div class="col-sm-12 col-md-6 col-lg-3">
-
-                    <div class="h-100 border border-secondary rounded p-4">
-
-                        <p class="fw-bold text-white text-center noto-serif">
-                            2. เรียนรู้เรื่องความรับผิดชอบต่อหน้าที่<br>และความซื่อสัตย์
-                        </p>
-
-                        <p class=" lh-lg mb-0 noto-serif blue">
-                            ตระหนักถึงความสำคัญของการทำหน้าที่ที่ได้รับมอบหมายอย่างเต็มความสามารถ
-                            พร้อมยึดมั่นในความซื่อสัตย์
-                            และกล้ารับผิดชอบต่อผลจากการกระทำของตนเอง
-                        </p>
-
+                <div class="col-sm-12 col-md-6 col-lg-3 ">
+                    <div class="value-frame tech-frame">
+                        <div class="value-card noto-serif">
+                            <p class="fw-bold text-center">
+                                2. เรียนรู้เรื่องความรับผิดชอบต่อหน้าที่<br
+                                    class="d-sm-block d-lg-none">และความซื่อสัตย์
+                            </p>
+                            <p class="lh-lg mb-0 blue">
+                                ตระหนักถึงความสำคัญของการทำหน้าที่ที่ได้รับมอบหมายอย่างเต็มความสามารถ
+                                พร้อมยึดมั่นในความซื่อสัตย์
+                                และกล้ารับผิดชอบต่อผลจากการกระทำของตนเอง
+                            </p>
+                            <span class="card-tag" aria-hidden="true">VAL::02</span>
+                        </div>
                     </div>
-
                 </div>
 
-
-                <!-- คอลัมน์ที่ 3 -->
-                <div class="col-sm-12 col-md-6 col-lg-3">
-
-                    <div class="h-100 border border-secondary rounded p-4">
-
-                        <p class="fw-bold text-white text-center noto-serif">
-                            3. เรียนรู้เรื่องความไว้วางใจ<br>ในการทำงานร่วมกับผู้อื่น
-                        </p>
-
-                        <p class="lh-lg mb-0 noto-serif blue">
-                            เรียนรู้ว่าการทำงานร่วมกันให้สำเร็จต้องอาศัยการสื่อสาร ความร่วมมือ และความไว้วางใจ
-                            ซึ่งเกิดขึ้นได้จากการรักษาคำพูด
-                            และการแสดงความรับผิดชอบต่อกัน
-                        </p>
-
+                <div class="col-sm-12 col-md-6 col-lg-3 ">
+                    <div class="value-frame tech-frame">
+                        <div class="value-card noto-serif">
+                            <p class="fw-bold text-center">
+                                3. เรียนรู้เรื่องความไว้วางใจ<br>ในการทำงานร่วมกับผู้อื่น
+                            </p>
+                            <p class="lh-lg mb-0 blue">
+                                เรียนรู้ว่าการทำงานร่วมกันให้สำเร็จต้องอาศัยการสื่อสาร ความร่วมมือ และความไว้วางใจ
+                                ซึ่งเกิดขึ้นได้จากการรักษาคำพูด
+                                และการแสดงความรับผิดชอบต่อกัน
+                            </p>
+                            <span class="card-tag" aria-hidden="true">VAL::03</span>
+                        </div>
                     </div>
-
                 </div>
 
-
-                <!-- คอลัมน์ที่ 4 -->
-                <div class="col-sm-12 col-md-6 col-lg-3">
-
-                    <div class="h-100 border border-secondary rounded p-4">
-
-                        <p class="fw-bold text-white text-center noto-serif">
-                            4. ตระหนักถึงการเสียสละ<br>เพื่อส่วนรวมและความหวัง
-                        </p>
-
-                        <p class="lh-lg mb-0 noto-serif blue">
-                            เข้าใจว่าบางสถานการณ์อาจต้องยอมลดความต้องการหรือความปลอดภัยของตนเอง
-                            เพื่อปกป้องผู้คนรอบข้างและรักษาความหวังที่จะนำไปสู่อนาคตที่ดีกว่า
-                        </p>
-
+                <div class="col-sm-12 col-md-6 col-lg-3 ">
+                    <div class="value-frame tech-frame">
+                        <div class="value-card noto-serif">
+                            <p class="fw-bold text-center">
+                                4. ตระหนักถึงการเสียสละ<br>เพื่อส่วนรวมและความหวัง
+                            </p>
+                            <p class="lh-lg mb-0 blue">
+                                เข้าใจว่าบางสถานการณ์อาจต้องยอมลดความต้องการหรือความปลอดภัยของตนเอง
+                                เพื่อปกป้องผู้คนรอบข้างและรักษาความหวังที่จะนำไปสู่อนาคตที่ดีกว่า
+                            </p>
+                            <span class="card-tag" aria-hidden="true">VAL::04</span>
+                        </div>
                     </div>
-
                 </div>
 
             </div>
 
         </div>
-
     </section>
 
 
-    <!-- เส้นคั่น -->
     <div class="container">
-        <hr class="border border-light border-2 opacity-100">
+        <hr>
     </div>
 
 
     <!-- ================= FOOTER / SUMMARY ================= -->
     <footer id="summary">
+        <div class="container py-5 px-3">
 
-        <div class="container py-5">
-
-            <div class="text-center mx-auto">
-
-
-
+            <div class="text-center noto-serif">
 
                 <p class="fs-2 lh-lg charm-bold">
-                    ธุลีดาราสลายสิ้นแล้ว ราตรีคลาแคล้วอรุณฉายฉาย
-                    <br>
+                    ธุลีดาราสลายสิ้นแล้ว <br class="d-sm-block d-lg-none"> ราตรีคลาแคล้วอรุณฉายฉาย
                 </p>
-                <h3 class="pattaya-regular"> “มหาสงครามข้ามดวงดาว” </h3>
-                <br>
-                <p class="lh-lg noto-serif blue">
 
-                    สงครามอาจจบลง การเดินทางอาจสิ้นสุด และผู้คนอาจกลายเป็นเพียงธุลี
-                    แม้เส้นทางจะเต็มไปด้วยความเจ็บปวดและการจากลา
-                    <br class="d-sm-none d-md-none d-lg-block">แต่ทุกการเสียสละที่พวกเขาทิ้งไว้ จะยังคงเป็นแสงเล็ก ๆ
+                <h3 class="pattaya-regular mb-4"> <br>“มหาสงครามข้ามดวงดาว” </h3>
+
+                <p class="lh-lg blue">
+                    <br>สงครามอาจจบลง การเดินทางอาจสิ้นสุด และผู้คนอาจกลายเป็นเพียงธุลี
+                    <br class="d-md-block d-none d-lg-none">แม้เส้นทางจะเต็มไปด้วยความเจ็บปวดและการจากลา
+                    <br class="d-sm-none d-lg-block">แต่ทุกการเสียสละที่พวกเขาทิ้งไว้
+                    <br class="d-md-block d-none d-lg-none">จะยังคงเป็นแสงเล็ก ๆ
                     แห่งความหวังที่นำทางไปสู่รุ่งอรุณของวันใหม่
                 </p>
 
             </div>
 
         </div>
-
     </footer>
-    <section class="container my-5">
-        <div class="accordion" id="faqAccordion">
 
-            <!-- คำถามที่ 1 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#question1"
-                        aria-expanded="true" aria-controls="question1">
-                        Q: ผมไม่ใช่สายกิจกรรม ไม่ชอบทำกิจกรรมเลย ไม่เข้ารับน้องได้ไหมครับ
-                    </button>
-                </h2>
-
-                <div id="question1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        A: การรับน้องนั้น มีขึ้นเพื่อกระชับความสัมพันธ์กับเพื่อนใหม่ที่กำลังจะเข้ามาเรียนในคณะ
-                        หรือสาขาวิชาเอก-โทนี้ด้วยกัน แต่ไม่มีการบังคับให้เข้าร่วมกิจกรรมนี้นะครับ
-                        ดังนั้นไม่ต้องเข้าก็ได้ เพราะไม่มีผลอะไรกับการใช้ชีวิตในสาขาวิชานี้แน่นอน
-                    </div>
-                </div>
-            </div>
-
-            <!-- คำถามที่ 2 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#question2" aria-expanded="false" aria-controls="question2">
-                        Q: แล้วกิจกรรมรับน้องของคณะ และรับน้องของเอก-โทของที่นี่มีโซตัสไหมคะ
-                    </button>
-                </h2>
-
-                <div id="question2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        A: ที่นี่ไม่มีโซตัสทั้งรับน้องของคณะ และรับน้องของเอก-โท
-                        ดังนั้นไม่ต้องกังวลนะคะ
-                    </div>
-                </div>
-            </div>
-
-            <!-- คำถามที่ 3 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#question3" aria-expanded="false" aria-controls="question3">
-                        Q: เคยได้ยินว่าเอกนี้มี "กิจกรรมห้องสมุดเคลื่อนที่"
-                        ซึ่งเป็นกิจกรรมที่เป็นไฮไลท์เด็ดของภาควิชา แต่ถ้าไม่อยากเข้าร่วมกิจกรรมนี้
-                        จะมีปัญหาอะไรไหมครับ
-                    </button>
-                </h2>
-
-                <div id="question3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        A: จริง ๆ ทางภาควิชาไม่ได้บังคับ แต่ "ขอความร่วมมือ"
-                        ดังนั้นเข้าร่วมเพื่อกิจกรรมเอาไว้ใส่ในแฟ้มรวบรวมผลงาน
-                        เพื่อสั่งสมประสบการณ์ก็ดีครับ
-                    </div>
-                </div>
-            </div>
-
-            <!-- คำถามที่ 4 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#question4" aria-expanded="false" aria-controls="question4">
-                        Q: ไม่ประสงค์ฝึกงานได้ไหมคะ
-                    </button>
-                </h2>
-
-                <div id="question4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        A: ถ้าเป็นเด็ก "เอก" นี้ จะต้องฝึกงานนะคะ
-                        เพราะต้องนำประสบการณ์ที่ได้จากการฝึกงานไปเรียนต่อในรายวิชา
-                        "สัมมนาการฝึกปฏิบัติงาน" เป็นวิชาบังคับ ซึ่งจะต้องนับเป็นหน่วยกิตก่อนจบการศึกษาด้วย
-                        แต่ถ้าเป็นเด็ก "โท" ไม่จำเป็นต้องฝึกงานค่ะ
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <section class="container my-5">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-
-            <!-- Indicators -->
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-
-            <!-- Carousel images -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="images/C1.webp" class="d-block w-100" alt="C1">
-                </div>
-
-                <div class="carousel-item">
-                    <img src="images/C2.webp" class="d-block w-100" alt="C2">
-                </div>
-
-                <div class="carousel-item">
-                    <img src="images/C3.webp" class="d-block w-100" alt="C3">
-                </div>
-            </div>
-
-            <!-- Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-
-        </div>
-    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/intro.js"></script>
     <script src="js/script.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-  AOS.init();
-</script>
+    <div class="scroll-rail" aria-hidden="true"><i></i></div>
 </body>
 
 </html>

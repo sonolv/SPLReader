@@ -75,8 +75,10 @@ sections.forEach(section => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      const max = document.documentElement.scrollHeight - innerHeight;
-      bar.style.setProperty('--p', max > 0 ? scrollY / max : 0);
+     const max = document.documentElement.scrollHeight - innerHeight;
+const p = max > 0 ? scrollY / max : 0;
+bar.style.setProperty('--p', p);
+document.documentElement.style.setProperty('--sp', p);   // เพิ่มบรรทัดนี้
       ticking = false;
     });
   };
@@ -85,7 +87,7 @@ sections.forEach(section => {
 
 
   /* ========== 4) ปกหนังสือขยับตามเมาส์ (เฉพาะอุปกรณ์ที่มีเมาส์) ========== */
-  const cover = document.querySelector('section:first-of-type .col-md-5 img');
+const cover = document.querySelector('#hero .hero-carousel');
   if (cover && !reduce && matchMedia('(hover: hover)').matches) {
     addEventListener('mousemove', e => {
       const x = (e.clientX / innerWidth  - 0.5) * 2;
@@ -149,15 +151,21 @@ sections.forEach(section => {
     }
 
     // ดาวตก
-    if (!shooting && Math.random() < 0.003) {
-      shooting = { x: Math.random() * w * 0.8, y: Math.random() * h * 0.4, vx: 9, vy: 4, life: 1 };
-    }
+   boost = Math.min(boost * 0.95 + Math.abs(scrollY - lastY) * 0.0004, 0.02);
+lastY = scrollY;
+if (!shooting && Math.random() < 0.006 + boost) {
+  shooting = {
+    x: Math.random() * w * 0.8, y: Math.random() * h * 0.4,
+    vx: 9, vy: 4, life: 1,
+    rgb: Math.random() < 0.35 ? '159,110,255' : '255,255,255'
+  };
+}
     if (shooting) {
       const s = shooting;
       const tx = s.x - s.vx * 8, ty = s.y - s.vy * 8;
       const g = ctx.createLinearGradient(s.x, s.y, tx, ty);
-      g.addColorStop(0, `rgba(255,255,255,${s.life})`);
-      g.addColorStop(1, 'rgba(255,255,255,0)');
+      g.addColorStop(0, `rgba(${s.rgb},${s.life})`);
+g.addColorStop(1, `rgba(${s.rgb},0)`);
       ctx.globalAlpha = 1;
       ctx.strokeStyle = g;
       ctx.lineWidth = 1.5;

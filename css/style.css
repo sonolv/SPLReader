@@ -1,50 +1,33 @@
-.pattaya-regular {
-  font-family: "Pattaya", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-.charm-bold {
-  font-family: "Charm", cursive;
-  font-weight: 700;
-  font-style: normal;
-}
-.charm-regular {
-  font-family: "Charm", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
+/* =========================================================
+   style.css 
+   ========================================================= */
 
-
-.noto-serif {
-  font-family: "Noto Serif Thai", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-
-}
-
-.blue{color: #c8d9ee;}
-
-.logofont {
-  font-family: "Bodoni Moda", serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
-}
-.text-indent {
-    text-indent: 1cm;
-}
-
+/* ---------- 1. ตัวแปร / ฟอนต์ / ยูทิลิตี้ ---------- */
 :root {
   --ease: cubic-bezier(.22, 1, .36, 1);
-  --accent: #0dcaf0;
+  --accent-rgb: 13, 202, 240;            /* ใช้คู่กับ rgba(var(--accent-rgb), .3) */
+  --accent: rgb(var(--accent-rgb));      /* #0dcaf0 */
+  --soft: #c8d9ee;
+  --violet: #6f42c1;                      /* ม่วงธีมเดียวกับ intro */
+
+  /* วงแหวนหลังหัวข้อ: ปรับที่นี่ที่เดียว เปลี่ยนทั้งสามส่วน */
+  --ring-size: clamp(360px, 46vw, 680px);
+  --ring-left: -9%;
+  --ring-top: 0;
 }
+@media (max-width: 991.98px) { :root { --ring-left: -25%; } }
+@media (max-width: 575.98px) { :root { --ring-left: -48%; } }
+
 html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 
+.pattaya-regular { font-family: "Pattaya", sans-serif; font-weight: 400; }
+.charm-bold      { font-family: "Charm", cursive;      font-weight: 700; }
+.noto-serif      { font-family: "Noto Serif Thai", serif; font-weight: 400; }
+.logofont        { font-family: "Bodoni Moda", serif; }
 
-/* ============ พื้นหลังดาว (canvas ถูกสร้างโดย JS) ============ */
+.blue { color: var(--soft); }
+
+/* ---------- 2. พื้นหลังดาว / แถบความคืบหน้า (สร้างโดย JS) ---------- */
 #stars {
   position: fixed; inset: 0;
   width: 100%; height: 100%;
@@ -52,7 +35,6 @@ html { scroll-behavior: smooth; scrollbar-gutter: stable; }
   pointer-events: none;
 }
 
-/* ============ แถบความคืบหน้าการเลื่อน (สร้างโดย JS) ============ */
 #progress {
   position: fixed; top: 0; left: 0;
   width: 100%; height: 3px;
@@ -62,282 +44,39 @@ html { scroll-behavior: smooth; scrollbar-gutter: stable; }
   transform: scaleX(var(--p, 0));
 }
 
-/* ============ Hero: เล่นตอนโหลดหน้า ============ */
-@keyframes fade-up   { from { opacity: 0; transform: translateY(40px); }  to { opacity: 1; transform: none; } }
-@keyframes fade-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: none; } }
+/* เส้นไฟแนวตั้งริมซ้าย ยาวขึ้นตามการเลื่อน (JS ตั้ง --sp) */
+.scroll-rail {
+  position: fixed; left: clamp(10px, 1.6vw, 28px); top: 90px; bottom: 40px;
+  width: 1px; z-index: 5; pointer-events: none;
+  background: rgba(var(--accent-rgb), .12);
+}
+.scroll-rail i {
+  position: absolute; left: 0; top: 0; width: 1px;
+  height: calc(var(--sp, 0) * 100%);
+  background: linear-gradient(to bottom, transparent, var(--accent));
+  box-shadow: 0 0 8px var(--accent);
+}
+.scroll-rail i::after {           /* จุดเรืองแสงปลายเส้น */
+  content: ""; position: absolute; left: -2px; bottom: -3px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 10px 2px var(--accent);
+}
+@media (max-width: 991.98px) { .scroll-rail { display: none; } }
+
+/* ---------- 3. คีย์เฟรมที่ใช้ร่วมกัน ---------- */
+@keyframes fade-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(-1deg); }
   50%      { transform: translateY(-16px) rotate(1deg); }
 }
 @keyframes glow {
-  0%, 100% { text-shadow: 0 0 6px rgba(13,202,240,.3); }
-  50%      { text-shadow: 0 0 22px rgba(13,202,240,.9); }
+  0%, 100% { text-shadow: 0 0 6px rgba(var(--accent-rgb), .3); }
+  50%      { text-shadow: 0 0 22px rgba(var(--accent-rgb), .9); }
 }
 @keyframes shimmer { to { background-position: 200% center; } }
+@keyframes ring-spin { to { rotate: 360deg; } }
 
-header .container > .d-flex > .d-flex { animation: fade-down 1s var(--ease) both; }
-
-section:first-of-type .col-md-5 { animation: fade-up 1.2s var(--ease) .2s both; }
-section:first-of-type .col-md-7 { animation: fade-up 1.2s var(--ease) .5s both; }
-
-section:first-of-type .col-md-5 img {
-  animation: float 6s ease-in-out infinite;
-  filter: drop-shadow(0 0 25px rgba(13,202,240,.35));
-  /* JS ขยับปกตามเมาส์ผ่านตัวแปรเหล่านี้ (ใช้ property translate แยกจาก transform) */
-  translate: var(--px, 0px) var(--py, 0px);
-  transition: translate .6s var(--ease);
-}
-section:first-of-type h1 .text-info {
-  display: inline-block;
-  animation: glow 2.5s ease-in-out infinite;
-}
-
-
-/* =========================================
-   SIDE MENU
-========================================= */
-
-.side-menu {
-
-    position: fixed;
-
-    top: 20%;
-
-    right: 25px;
-
-    transform: translateY(-50%);
-
-    width: 90px;
-
-    padding: 18px 12px;
-
-    background: rgba(255, 255, 255, 0.95);
-
-    border-radius: 45px;
-
-    z-index: 999;
-
-    box-shadow: 0 10px 30px rgba(0,0,0,.15);
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 18px;
-}
-
-
-/* =========================================
-   INDEX
-========================================= */
-
-.side-menu-title {
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    color: #222;
-
-    padding-bottom: 10px;
-
-    border-bottom: 1px solid #ddd;
-
-    width: 100%;
-
-    text-align: center;
-}
-
-
-/* =========================================
-   ITEM
-========================================= */
-
-.side-item {
-
-    position: relative;
-
-    width: 55px;
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-decoration: none;
-
-    color: white;
-
-    transition: .4s ease;
-}
-
-
-/* =========================================
-   วงกลม
-========================================= */
-
-.side-dot {
-
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-
-    background: #333;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    transition: .4s ease;
-}
-
-
-/* =========================================
-   ชื่อเมนู
-========================================= */
-
-.side-text {
-
-    position: absolute;
-
-    right: 65px;
-
-    white-space: nowrap;
-
-    padding: 8px 14px;
-
-    background: #111;
-
-    color: white;
-
-    border-radius: 20px;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform: translateX(10px);
-
-    transition: .3s ease;
-}
-
-
-/* =========================================
-   HOVER
-========================================= */
-
-.side-item:hover .side-dot {
-
-    transform: scale(1.2);
-}
-
-
-.side-item:hover .side-text {
-
-    opacity: 1;
-
-    visibility: visible;
-
-    transform: translateX(0);
-}
-
-
-/* =========================================
-   ACTIVE
-========================================= */
-
-.side-item.active .side-dot {
-
-    background: #00aeea;
-
-    transform: scale(1.15);
-
-    box-shadow:
-        0 0 0 5px rgba(0,174,234,.15);
-}
-
-
-/* =========================================
-   เส้นเชื่อม
-========================================= */
-
-.side-item:not(:last-child)::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 1px;
-
-    height: 18px;
-
-    background: #ddd;
-
-    bottom: -18px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 768px) {
-
-    .side-menu {
-
-        right: 10px;
-
-        width: 65px;
-
-        padding: 12px 8px;
-
-        gap: 12px;
-    }
-
-
-    .side-menu-title {
-
-        font-size: 11px;
-    }
-
-
-    .side-item {
-
-        width: 42px;
-        height: 42px;
-    }
-
-
-    .side-dot {
-
-        width: 34px;
-        height: 34px;
-
-        font-size: 9px;
-    }
-
-}
-
-
-
-
-
-/* ============ Scroll Reveal (JS เป็นคนใส่ .is-visible) ============ */
+/* ---------- 4. Scroll Reveal (JS เป็นคนใส่ .is-visible) ---------- */
 .js :is(section h2, #highlight p, #value .row > div, footer .container > div > *) {
   opacity: 0;
   transform: translateY(60px);
@@ -351,7 +90,481 @@ section:first-of-type h1 .text-info {
   filter: none;
 }
 
-/* เส้นคั่นขีดออกจากซ้ายไปขวา */
+/* ---------- 5. เมนูด้านบน ----------
+   ค่าทั้งหมดคัดลอกจาก .intro-nav ใน intro.css เพื่อให้ขนาดและระยะห่างเท่ากับหน้า intro
+   (ซ้าย | ชื่อเว็บกลาง | ขวา) ต่างกันแค่มีแถบพื้นดำรองด้านหลัง */
+nav.side-menu {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1100;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  gap: clamp(1rem, 3vw, 3rem);
+  padding: clamp(.8rem, 2.4vh, 1.5rem) 5vw;
+
+  background: rgba(0, 0, 0, .88);
+}
+
+nav.side-menu .nav-l,
+nav.side-menu .nav-r {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem clamp(.9rem, 1.8vw, 1.7rem);
+}
+nav.side-menu .nav-l { justify-content: flex-end; }
+nav.side-menu .nav-r { justify-content: flex-start; }
+
+nav.side-menu .side-item {
+  font-size: clamp(.78rem, 1.05vw, .95rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: .05em;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--accent);
+  transition: color .25s ease;
+}
+nav.side-menu .side-item:hover,
+nav.side-menu .side-item.active { color: #fff; }
+
+nav.side-menu .nav-brand {
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  font: 600 clamp(.7rem, 1.2vw, .9rem)/1.5 "Noto Serif Thai", serif;
+  letter-spacing: .14em;
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  nav.side-menu {
+    grid-template-columns: 1fr 1fr;
+    gap: .35rem .5rem;
+    padding: .6rem 4vw;
+  }
+  nav.side-menu .nav-brand { grid-column: 1 / -1; order: -1; }
+  nav.side-menu .nav-l,
+  nav.side-menu .nav-r { gap: .3rem .9rem; }
+}
+
+/* เว้นระยะด้านบนไม่ให้เนื้อหาชิดเมนูเมื่อกดลิงก์ */
+#hero, #highlight, #value, #summary { scroll-margin-top: 80px; }
+
+/* ---------- 6. HERO ---------- */
+#hero {
+  position: relative;
+  isolation: isolate;
+  padding-top: 80px;
+  --ring-top: 35px;
+}
+
+#hero > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* เส้นกราฟิกแนวนอน */
+#hero::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+
+  top: 115px;
+  left: 8%;
+  right: 5%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--accent-rgb), .3) 20%,
+    rgba(var(--accent-rgb), .08) 65%,
+    transparent
+  );
+
+  transform-origin: left;
+  animation: hero-line-reveal 1.8s var(--ease) both;
+}
+
+/* แอนิเมชันตอนโหลดหน้า */
+#hero .col-md-5 { animation: fade-up 1.2s var(--ease) .2s both; }
+#hero .col-md-7 { animation: fade-up 1.2s var(--ease) .5s both; }
+
+#hero h1 .text-info {
+  display: inline-block;
+  animation: glow 2.5s ease-in-out infinite;
+}
+
+/* แถบคำกำกับแนวตั้งด้านซ้าย (แสดงเฉพาะจอกว้าง) */
+.hero-side-design {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  top: 140px;
+  left: clamp(12px, 2.2vw, 36px);
+
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  width: max-content;
+  color: var(--accent);
+  pointer-events: none;
+  user-select: none;
+
+  animation: hero-side-enter 1.2s var(--ease) .15s both;
+}
+@media (min-width: 1500px) { .hero-side-design { display: flex; } }
+
+.hero-side-caption {
+  display: block;
+  writing-mode: vertical-rl;
+  font-family: monospace;
+  font-size: 8px;
+  letter-spacing: .13em;
+  line-height: 1.6;
+  opacity: .55;
+}
+
+.hero-side-line {
+  display: block;
+  width: 1px;
+  height: 75px;
+  margin-left: 6px;
+  background: linear-gradient(to bottom, var(--accent), rgba(var(--accent-rgb), 0));
+  transform-origin: top;
+  animation: hero-side-line-glow 3s ease-in-out infinite;
+}
+
+@keyframes hero-side-enter {
+  from { opacity: 0; translate: -18px 0; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes hero-ring-breathe {
+  0%, 100% { opacity: .55; scale: 1; }
+  50%      { opacity: 1;   scale: 1.025; }
+}
+@keyframes hero-line-reveal {
+  from { opacity: 0; transform: scaleX(0); }
+  to   { opacity: 1; transform: scaleX(1); }
+}
+@keyframes hero-side-line-glow {
+  0%, 100% { opacity: .4; }
+  50%      { opacity: 1; }
+}
+
+@media (max-width: 575.98px) {
+  #hero::after { top: 95px; left: 15%; right: 3%; }
+}
+
+/* ---------- 6-ring. วงแหวนหลังหัวข้อ (ใช้ร่วม Hero / Highlight / Value) ---------- */
+#hero::before,
+#highlight::before,
+#value::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+
+  width: var(--ring-size);
+  aspect-ratio: 1;
+  left: var(--ring-left);
+  top: var(--ring-top);
+
+  border: 1px solid rgba(var(--accent-rgb), .24);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 45px rgba(var(--accent-rgb), .025),
+    0 0 35px rgba(var(--accent-rgb), .025);
+}
+
+/* Hero: หายใจ + parallax */
+#hero::before {
+  animation: hero-ring-breathe 8s ease-in-out infinite;
+  translate: 0 calc(var(--sp, 0) * -220px);
+}
+
+/* Highlight / Value: หมุนช้าๆ พร้อมขีดสว่างให้เห็นการหมุน */
+#highlight::before,
+#value::before {
+  background: conic-gradient(from 0deg, rgba(var(--accent-rgb), .55), transparent 18%, transparent 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+          mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+}
+#highlight::before { animation: ring-spin 40s linear infinite; }
+#value::before {
+  animation: ring-spin 55s linear infinite reverse;
+  translate: 0 calc(var(--sp, 0) * -220px);
+}
+
+/* ปรับตำแหน่งวงของแต่ละส่วนที่นี่ (ค่าติดลบมากเกินไปจะถูก overflow: hidden ตัด) */
+#highlight { --ring-top: -3rem; }
+#value     { --ring-top: -3rem; }
+
+@media (max-width: 767.98px) { #highlight::before { opacity: .6; } }
+
+/* ---------- 6a. หัวข้อแต่ละส่วน (01 BOOK / 02 HIGHLIGHT / 03 VALUE) ---------- */
+.sec-head { margin-bottom: clamp(1.5rem, 4vw, 3rem); }
+
+.sec-code {
+  margin: 0 0 .6rem;
+  overflow: hidden;
+  white-space: nowrap;
+  font: 400 .7rem/1.6 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(var(--accent-rgb), .5);
+}
+
+.sec-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0 .5rem;
+  margin: 0;
+
+  font-family: "Bodoni Moda", serif;
+  font-size: clamp(2.4rem, 6.4vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .01em;
+  color: #fff;
+  text-shadow: 3px 3px 0 var(--violet), 0 0 36px rgba(var(--accent-rgb), .4);
+}
+
+.sec-num {
+  margin-top: .12em;
+  font-size: .42em;
+  font-weight: 500;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  text-shadow: 0 0 18px rgba(var(--accent-rgb), .6);
+}
+
+.boxed {
+  position: relative;
+  display: inline-block;
+  padding: 0 .06em;
+  color: var(--accent);
+  text-shadow: 0 0 30px rgba(var(--accent-rgb), .55);
+}
+.boxed::after {
+  content: "";
+  position: absolute;
+  inset: .06em -.04em .02em;
+  border: 1px solid var(--accent);
+  pointer-events: none;
+}
+.js .boxed::after {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .9s var(--ease) .6s;
+}
+.js .sec-title.is-visible .boxed::after { transform: scaleX(1); }
+
+.sec-sub {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem .75rem;
+  margin-top: .75rem;
+
+  font-family: "Noto Serif Thai", serif;
+  font-size: clamp(1rem, 2vw, 1.45rem);
+  letter-spacing: .05em;
+  color: var(--soft);
+}
+.sec-sub-zh {
+  font-family: "Noto Serif SC", "Noto Serif JP", "Songti SC", "SimSun", serif;
+  font-size: 1.12em;
+  letter-spacing: .18em;
+}
+.sec-pipe {
+  width: 2px;
+  height: 1.3em;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.sec-pixels {
+  width: clamp(110px, 18vw, 240px);
+  height: 14px;
+  background:
+    linear-gradient(90deg,
+      var(--accent) 0 10px, transparent 10px 14px,
+      var(--violet) 14px 26px, transparent 26px 28px,
+      var(--accent) 28px 34px, transparent 34px 40px,
+      var(--soft) 40px 44px, transparent 44px 48px) 0 0 / 48px 100% repeat-x;
+  -webkit-mask-image: linear-gradient(#000 0 40%, transparent 40% 54%, #000 54%);
+          mask-image: linear-gradient(#000 0 40%, transparent 40% 54%, #000 54%);
+  animation: px-shift 1.4s steps(4) infinite;
+}
+@keyframes px-shift { to { background-position-x: -48px; } }
+
+.sec-bars {
+  height: 16px;
+  margin-top: 1.1rem;
+  background:
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 96px 4px no-repeat,
+    linear-gradient(var(--violet), var(--violet)) 44px 12px / 130px 4px no-repeat;
+  filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), .6));
+}
+
+@supports selector(:has(*)) {
+  .js .sec-head :is(.sec-code, .sec-sub, .sec-bars) {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .9s var(--ease), transform .9s var(--ease);
+  }
+  .js .sec-head:has(.sec-title.is-visible) :is(.sec-code, .sec-sub, .sec-bars) {
+    opacity: 1;
+    transform: none;
+  }
+  .js .sec-head:has(.sec-title.is-visible) .sec-sub  { transition-delay: .35s; }
+  .js .sec-head:has(.sec-title.is-visible) .sec-bars { transition-delay: .6s; }
+}
+
+/* ---------- 6b. กรอบเทคโนโลยี (เส้นบาง + จุดมุมทั้งสี่) ---------- */
+.tech-frame {
+  position: relative;
+  padding: 12px;
+  border: 1px solid rgba(var(--accent-rgb), .55);
+  transition: border-color .4s ease;
+}
+.tech-frame::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, var(--accent) 0 3px, transparent 3.5px) 0 0     / 10px 10px no-repeat,
+    radial-gradient(circle, var(--accent) 0 3px, transparent 3.5px) 100% 0  / 10px 10px no-repeat,
+    radial-gradient(circle, var(--accent) 0 3px, transparent 3.5px) 0 100%  / 10px 10px no-repeat,
+    radial-gradient(circle, var(--accent) 0 3px, transparent 3.5px) 100% 100% / 10px 10px no-repeat;
+  filter: drop-shadow(0 0 4px var(--accent));
+}
+.tech-frame:hover { border-color: var(--accent); }
+
+/* ---------- 6c. HERO: แกลเลอรีปก (Bootstrap carousel) ---------- */
+.hero-carousel {
+  max-width: 340px;
+  margin-inline: auto;
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 25px rgba(var(--accent-rgb), .35));
+}
+
+/* padding ให้ปกมีที่ขยับตามเมาส์โดยไม่โดน overflow ของ carousel ตัด */
+.hero-carousel .carousel-item { padding: 16px; }
+.hero-carousel .carousel-item img {
+  aspect-ratio: 2 / 3;
+  object-fit: contain;
+  /* JS ขยับปกตามเมาส์ผ่านตัวแปรเหล่านี้ */
+  translate: var(--px, 0px) var(--py, 0px);
+  transition: translate .6s var(--ease);
+}
+
+/* จุดบอกตำแหน่งอยู่ใต้รูป (ต้องวาง .carousel-indicators หลัง .carousel-inner ใน HTML) */
+.hero-carousel .carousel-indicators { position: relative; margin: .75rem 0 0; }
+.hero-carousel .carousel-indicators [data-bs-target] {
+  width: 28px;
+  height: 3px;
+  background-color: var(--accent);
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), .8);
+}
+
+/* ปุ่มลูกศร: ไม่ทับแถวจุดด้านล่าง */
+.hero-carousel .carousel-control-prev,
+.hero-carousel .carousel-control-next { bottom: 2.75rem; width: 14%; }
+.hero-carousel .carousel-control-prev-icon,
+.hero-carousel .carousel-control-next-icon { filter: drop-shadow(0 0 6px var(--accent)); }
+
+/* ---------- 6d. HIGHLIGHT: แถบลูกศร ---------- */
+#highlight {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;   /* กันแถบที่เลื่อนเข้ามาทำให้เกิดแถบเลื่อนแนวนอน */
+}
+
+#highlight .highlight-bands > div {
+  min-width: 0;
+  filter: drop-shadow(0 0 14px rgba(var(--accent-rgb), .18));
+}
+
+#highlight .band {
+  --tip: clamp(22px, 3.4vw, 44px);   /* ความลึกของปลายลูกศร */
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 4vw, 3.5rem);
+
+  text-align: left;
+    text-indent: 3em;
+  font-size: clamp(.95rem, 1.25vw, 1.08rem);
+  line-height: 2;
+  white-space: normal;
+  overflow: visible;
+  overflow-wrap: break-word;
+}
+
+/* ชั้นขอบไล่สี + ชั้นพื้นด้านใน ตัดด้วย clip-path รูปลูกศรเดียวกัน */
+#highlight .band::before,
+#highlight .band::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  clip-path: var(--shape);
+}
+#highlight .band::before { inset: 0; background: var(--edge); }
+#highlight .band::after  { background: linear-gradient(90deg, rgba(4, 10, 20, .86), rgba(10, 18, 34, .8)); }
+
+/* ปลายลูกศรชี้ซ้าย (ชิดขวา) */
+#highlight .band--r {
+  --shape: polygon(var(--tip) 0, 100% 0, 100% 100%, var(--tip) 100%, 0 50%);
+  --edge: linear-gradient(90deg, var(--accent), var(--violet));
+  padding-left: calc(var(--tip) + clamp(1.2rem, 3vw, 2.5rem));
+}
+#highlight .band--r::after { inset: 1px 0 1px 1px; }
+
+/* ปลายลูกศรชี้ขวา (ชิดซ้าย) */
+#highlight .band--l {
+  --shape: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%);
+  --edge: linear-gradient(90deg, var(--violet), var(--accent));
+  padding-right: calc(var(--tip) + clamp(1.2rem, 3vw, 2.5rem));
+}
+#highlight .band--l::after { inset: 1px 1px 1px 0; }
+
+/* ก่อนโผล่: แถบสไลด์เข้ามาจากฝั่งของตัวเอง (ทับ transform ของ Scroll Reveal) */
+.js #highlight .band--r:not(.is-visible) { transform: translateX(90px); }
+.js #highlight .band--l:not(.is-visible) { transform: translateX(-90px); }
+
+/* ---------- 7. เส้นคั่นเซกชัน ---------- */
+.container > hr {
+  height: 2px;
+  margin: 2rem 0;
+  border: 0;
+  opacity: 1;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--accent-rgb), .15) 8%,
+    var(--accent) 50%,
+    rgba(var(--accent-rgb), .15) 92%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 5px rgba(var(--accent-rgb), .45),
+    0 0 14px rgba(var(--accent-rgb), .15);
+}
+
 .js hr {
   transform-origin: left;
   transform: scaleX(0);
@@ -359,44 +572,86 @@ section:first-of-type h1 .text-info {
 }
 .js hr.is-visible { transform: scaleX(1); }
 
-/* เส้นใต้หัวข้อ h2 */
-section h2::after {
-  content: "";
-  display: block;
-  width: 80px; height: 3px;
-  margin: 1rem auto 0;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-}
-.js section h2::after {
-  transform: scaleX(0);
-  transition: transform 1s var(--ease) .5s;
-}
-.js section h2.is-visible::after { transform: scaleX(1); }
-
-/* ============ การ์ดคุณค่า: ลอย + แสงตามเมาส์ ============ */
-#value .row > div > div {
+/* ---------- 8. VALUE: การ์ดคุณค่า ---------- */
+#value {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  transition: transform .5s var(--ease), box-shadow .5s, border-color .5s;
 }
-#value .row > div > div::before {
+
+.value-grid > div { display: flex; }
+.value-frame { display: flex; flex: 1; min-width: 0; }
+
+.value-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  min-height: 270px;
+  padding: 2rem;
+
+  border: 1px solid rgba(var(--accent-rgb), .4);
+  border-radius: 14px;
+  background:
+    linear-gradient(145deg, rgba(var(--accent-rgb), .07), transparent 65%),
+    rgba(3, 10, 18, .72);
+  box-shadow: inset 0 0 25px rgba(var(--accent-rgb), .035);
+
+  transition: transform .4s ease, border-color .4s ease, box-shadow .4s ease;
+}
+
+/* แสงตามเมาส์ (JS ตั้ง --mx / --my) */
+.value-card::before {
   content: "";
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   z-index: -1;
   background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%),
-              rgba(13,202,240,.18), transparent 65%);
+              rgba(var(--accent-rgb), .18), transparent 65%);
   opacity: 0;
   transition: opacity .4s;
 }
-#value .row > div > div:hover {
-  transform: translateY(-10px);
-  border-color: var(--accent) !important;
-  box-shadow: 0 10px 35px rgba(13,202,240,.25);
-}
-#value .row > div > div:hover::before { opacity: 1; }
 
-/* ============ ข้อความไล่แสงท้ายเว็บ ============ */
+/* เส้นไฟด้านบนการ์ด */
+.value-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  width: 65px;
+  height: 3px;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), .8);
+}
+
+.value-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  background: rgba(4, 22, 30, .92);
+  box-shadow: 0 8px 28px rgba(var(--accent-rgb), .15);
+}
+.value-card:hover::before { opacity: 1; }
+
+.value-card p:first-child {
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.card-tag {
+  position: absolute;
+  top: .7rem;
+  right: 1rem;
+  font: 400 .62rem/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: .14em;
+  color: rgba(var(--accent-rgb), .55);
+}
+
+@media (max-width: 575.98px) {
+  .value-card { min-height: auto; }
+}
+
+/* ---------- 9. FOOTER: ข้อความไล่แสง ---------- */
 footer h3 {
   background: linear-gradient(90deg, #fff, var(--accent), #fff, var(--accent));
   background-size: 200% auto;
@@ -406,7 +661,7 @@ footer h3 {
   animation: shimmer 5s linear infinite;
 }
 
-/* ============ ผู้ใช้ที่ปิดแอนิเมชันในระบบ ============ */
+/* ---------- 10. ผู้ใช้ที่ปิดแอนิเมชันในระบบ ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -415,3 +670,5 @@ footer h3 {
     transition-delay: 0s !important;
   }
 }
+
+
