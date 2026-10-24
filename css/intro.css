@@ -226,21 +226,18 @@ html.intro-lock { overflow: hidden; }
 .intro-nav {
   position: absolute; top: 0; left: 0; width: 100%;
   z-index: 3;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: start;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: clamp(1rem, 3vw, 3rem);
-  padding: clamp(.8rem, 2.4vh, 1.5rem) 5vw 0;
+  padding: clamp(.8rem, 2.4vh, 1.5rem) 5vw;
   pointer-events: auto;
 }
 .intro-nav ul {
   list-style: none; margin: 0; padding: 0;
-  display: flex; flex-wrap: wrap;
-  gap: .4rem clamp(.9rem, 1.8vw, 1.7rem);
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: .4rem clamp(1.2rem, 2.2vw, 2.2rem);
 }
-.intro-nav .nav-l { justify-content: flex-end; }
-.intro-nav .nav-r { justify-content: flex-start; }
-
 .intro-nav li {
   opacity: 0;
   translate: 0 -10px;
@@ -366,11 +363,8 @@ html.intro-lock { overflow: hidden; }
    ===================================================================== */
 @media (max-width: 768px) {
   .bands-stage { transform: rotateX(18deg) rotateZ(-8deg); }
-  .intro-nav { grid-template-columns: 1fr; justify-items: center; gap: .5rem; }
-  .intro-nav .nav-l, .intro-nav .nav-r { justify-content: center; }
-  .intro-nav .intro-caption { order: -1; }
-}
-
+  .intro-nav { flex-direction: column; gap: .35rem; padding: .6rem 4vw; }
+.intro-nav ul { justify-content: center; gap: .3rem .9rem; }}
 /* พื้นที่สำรองสำหรับโลโก้ใน Intro */
 .intro-logo-placeholder {
     display: block;

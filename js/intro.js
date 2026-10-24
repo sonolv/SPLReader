@@ -21,14 +21,13 @@
     introCaption: 'SPLReader  ·  Book Special Site',
     scrollText: 'SCROLL',                // ข้อความปุ่มด้านล่างของหน้าปก ('' = ไม่แสดง)
 
-    // เมนูด้านบน (ซ้าย | ข้อความกลาง | ขวา)  href ใส่ id ของส่วนในหน้าเว็บคุณ
-    navLeft: [
-      { label: 'Book', href: '#hero' },
-      { label: 'Highlight', href: '#highlight' }
-    ],
-    navRight: [{ label: 'Value', href: '#value' },
-    { label: 'Summary', href: '#summary' }
-    ],
+    navItems: [
+  { label: 'Book',           href: '#hero' },
+  { label: "Reader's Guide", href: '#guide' },
+  { label: 'Highlight',      href: '#highlight' },
+  { label: 'Value',          href: '#value' },
+  { label: 'Summary',        href: '#summary' }
+],
 
     // แถวโค้ดเรืองแสงในแถบ 3 มิติ (ใส่ไทย/อังกฤษ/สัญลักษณ์ได้)
     codeLines: [
@@ -214,11 +213,10 @@
       </div>
 
       <div class="intro-p2">
-        <nav class="intro-nav" aria-label="เมนูหลัก">
-          <ul class="nav-l"></ul>
-          <p class="intro-caption"></p>
-          <ul class="nav-r"></ul>
-        </nav>
+       <nav class="intro-nav" aria-label="เมนูหลัก">
+  <p class="intro-caption"></p>
+  <ul class="nav-links"></ul>
+</nav>
         <div class="intro-titlebox">
           <div class="intro-title"></div>
           <div class="intro-subtitle"></div>
@@ -249,21 +247,17 @@
     intro.querySelector('.intro-subtitle').textContent = CONFIG.introSubtitle;
     buildBands(intro.querySelector('.bands-stage'));
 
-    // เมนูด้านบน
-    let n = 0;
-    [['.nav-l', CONFIG.navLeft], ['.nav-r', CONFIG.navRight]].forEach(([sel, items]) => {
-      const ul = intro.querySelector(sel);
-      (items || []).forEach(item => {
-        const li = document.createElement('li');
-        li.style.setProperty('--n', n++);
-        const a = document.createElement('a');
-        a.href = item.href;
-        a.textContent = item.label;
-        a.addEventListener('click', (e) => { e.preventDefault(); goTo(item.href); });
-        li.append(a);
-        ul.append(li);
-      });
-    });
+    const ul = intro.querySelector('.nav-links');
+(CONFIG.navItems || []).forEach((item, n) => {
+  const li = document.createElement('li');
+  li.style.setProperty('--n', n);
+  const a = document.createElement('a');
+  a.href = item.href;
+  a.textContent = item.label;
+  a.addEventListener('click', (e) => { e.preventDefault(); goTo(item.href); });
+  li.append(a);
+  ul.append(li);
+});
 
     // ปุ่ม SCROLL
     const cue = intro.querySelector('.intro-scrollcue');

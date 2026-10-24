@@ -5,7 +5,7 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Side Menu
-const sections = document.querySelectorAll("#highlight, #value, #summary");
+const sections = document.querySelectorAll("#hero, #guide, #highlight, #value, #summary");
 const sideItems = document.querySelectorAll(".side-item");
 
 const observer = new IntersectionObserver((entries) => {
@@ -36,6 +36,7 @@ sections.forEach(section => {
   /* ========== 2) Scroll Reveal ========== */
   const revealSelectors = [
     'section h2',
+    '#guide .row > div',
     '#highlight p',
     '#value .row > div',
     'footer .container > div > *',
@@ -115,6 +116,7 @@ const cover = document.querySelector('#hero .hero-carousel');
   const ctx = canvas.getContext('2d');
 
   let w = 0, h = 0, stars = [], shooting = null;
+  let boost = 0, lastY = scrollY;
 
   const makeStars = () => {
     const dpr = Math.min(devicePixelRatio || 1, 2);
